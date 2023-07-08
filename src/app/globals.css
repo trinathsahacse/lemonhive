@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+.custom-nav{
+  border-bottom: 1px solid #ddd;
+}
+.custom-logo-title{
+  color: #2F80ED;
+  font-weight:bold;
+  font-size: 20px;
+  margin-left:10px;
+}
+.custom-bg-color{
+  background-color: #2F80ED;
+}
+.card-total{
+  color:#fff;
+  font-size:16px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.card-des{
+  color:#fff;
+  font-size:14px;
+  text-align: justify;
+}
+.card-box{
+  background-color: #fff;
+  height: 40px;
+  width: 40px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
