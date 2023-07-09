@@ -4,16 +4,23 @@ import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import logo from '../../public/Vector.png'
+import cart from '../../public/cart.png'
+import Cart from './cart';
 
-const navigation = [
-  { name: 'Product', href: '#' },
-  { name: 'Features', href: '#' },
-  { name: 'Marketplace', href: '#' },
-  { name: 'Company', href: '#' },
-]
-
-export default function Header() {
+type headerProps = {
+  carts: {
+    quantity:number,
+    subtotal:number,
+    product:{
+        name:string,
+        image:string,
+        price:number
+    }
+  }[],
+}
+const Header = ({carts}:headerProps) =>  {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [cartMenuOpen, setCartMenuOpen] = useState(false)
 
   return (
     <div className="bg-white">
@@ -40,16 +47,16 @@ export default function Header() {
               <Bars3Icon className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
-          {/* <div className="hidden lg:flex lg:gap-x-12">
-            {navigation.map((item) => (
-              <a key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-gray-900">
-                {item.name}
-              </a>
-            ))}
-          </div> */}
+          
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-              Log in <span aria-hidden="true">&rarr;</span>
+          <a href="#!" className="-m-1.5 p-1.5 border border-gray-300 flex items-center" onClick={()=>setCartMenuOpen(true)}>
+              
+              <img
+                className="h-6 w-auto"
+                src={cart.src}
+                alt=""
+              />
+              <p className="ml-1 text-sm">Cart <span>({carts? carts.length : 0})</span></p>
             </a>
           </div>
         </nav>
@@ -77,18 +84,25 @@ export default function Header() {
             <div className="mt-6 flow-root">
               <div className="-my-6 divide-y divide-gray-500/10">
                 <div className="py-6">
-                  <a
-                    href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  >
-                    Log in
-                  </a>
+                <a href="#!" className="-m-1.5 p-1.5 border border-gray-300 flex items-center" onClick={()=>setCartMenuOpen(true)}>
+              
+              <img
+                className="h-6 w-auto"
+                src={cart.src}
+                alt=""
+              />
+              <p className="ml-1 text-sm">Cart <span>({carts? carts.length : 0})</span></p>
+            </a>
                 </div>
               </div>
             </div>
           </Dialog.Panel>
         </Dialog>
+        {carts?
+          <Cart cartMenuOpen={cartMenuOpen} carts={carts} setCartMenuOpen={setCartMenuOpen}></Cart>
+        :''}
       </header>
     </div>
   )
 }
+export default Header;
